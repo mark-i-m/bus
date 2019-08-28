@@ -1,0 +1,5 @@
+trans_id,lang,translation
+http://www.mymetrobus.com/,en,http://www.mymetrobus.com/
+http://www.mymetrobus.com/,es,http://www.cityofmadison.com/es/metro/
+http://www.cityofmadison.com/metro/routes-schedules/supplemental-school-service/,en,http://www.cityofmadison.com/metro/routes-schedules/supplemental-school-service/
+http://www.cityofmadison.com/metro/routes-schedules/supplemental-school-service/,es,http://www.cityofmadison.com/es/metro/routes-schedules/supplemental-school-service/

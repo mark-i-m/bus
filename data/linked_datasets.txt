@@ -1,0 +1,4 @@
+url,trip_updates,vehicle_positions,service_alerts
+http://transitdata.cityofmadison.com/TripUpdate/TripUpdates.pb,1,0,0
+http://transitdata.cityofmadison.com/Vehicle/VehiclePositions.pb,0,1,0
+http://transitdata.cityofmadison.com/Alert/Alerts.pb,0,0,1
