@@ -431,7 +431,9 @@ fn main() -> Result<(), failure::Error> {
     .setting(clap::AppSettings::SubcommandRequiredElseHelp)
     .get_matches();
 
-    let data = Data::read("data")?;
+    let data_dir = std::env::var("BUS_DATA").unwrap_or("data".into());
+
+    let data = Data::read(&data_dir)?;
 
     match matches.subcommand() {
         ("stop", Some(sub_m)) => {
