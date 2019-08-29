@@ -229,6 +229,38 @@ struct StopBusInfo {
     buses: Vec<(String, String, NaiveTime)>,
 }
 
+struct FilterConfig<'s> {
+    /// Stop ID
+    stop_id: &'s str,
+
+    /// List buses at or after `after`
+    after: DateTime<Local>,
+
+    /// How many buses to list?
+    how_many: Option<usize>,
+}
+
+impl<'s> FilterConfig<'s> {
+    pub fn new(stop_id: &'s str) -> FilterConfig<'s> {
+        Self {
+            stop_id,
+            after: Local::now(),
+            how_many: None,
+        }
+    }
+
+    pub fn after(self, after: DateTime<Local>) -> Self {
+        Self { after, ..self }
+    }
+
+    pub fn how_many(self, how_many: usize) -> Self {
+        Self {
+            how_many: Some(how_many),
+            ..self
+        }
+    }
+}
+
 struct Data {
     pub trips: HashMap<String, Trip>,               // by trip_id
     pub stops: HashMap<String, Stop>,               // by stop_id
@@ -238,32 +270,6 @@ struct Data {
 
 impl Data {
     pub fn read(data_dir: &str) -> Result<Self, failure::Error> {
-        /*
-                        for trip in raw.trips.deserialize() {
-                            let trip: Trip = trip?;
-
-                            println!(
-                                "Route {} {} {} {}",
-                                trip.trip_id, trip.route_short_name, trip.trip_headsign, trip.service_id
-                            );
-                        }
-
-            for stop in raw.stops.deserialize() {
-                let stop: Stop = stop?;
-
-                println!("Stop {} {}", stop.stop_id, stop.stop_name);
-            }
-
-        for stop_time in raw.stop_times.deserialize() {
-            let stop_time: StopTime = stop_time?;
-
-            println!(
-                "Trip {} at Stop {} at {}",
-                stop_time.trip_id, stop_time.stop_id, stop_time.departure_time
-            );
-        }
-                */
-
         let mut calendar: HashMap<String, Calendar> = ReaderBuilder::new()
             .has_headers(true)
             .from_path(format!("{}/calendar.txt", data_dir))?
@@ -322,18 +328,30 @@ impl Data {
         })
     }
 
-    // Gets all buses scheduled for this stop today.
-    pub fn stop_sched(&self, stop_id: &str) -> Result<StopBusInfo, failure::Error> {
-        if let Some(stop) = self.stops.get(stop_id) {
+    /// Get buses at the stop matching the given filter.
+    pub fn stop_sched(&self, conf: FilterConfig) -> Result<StopBusInfo, failure::Error> {
+        fn to_local(naive: NaiveDate) -> Date<Local> {
+            Local::today()
+                .timezone()
+                .from_local_date(&naive)
+                .single()
+                .expect("ambiguous date")
+        }
+
+        fn to_local_time(naive: NaiveTime) -> DateTime<Local> {
+            Local::today().and_time(naive).expect("invalid date/time")
+        }
+
+        if let Some(stop) = self.stops.get(conf.stop_id) {
             let buses = self
                 .stop_times
-                .get(stop_id)
+                .get(conf.stop_id)
                 .cloned()
                 .unwrap_or_else(|| vec![]);
 
             // Filter buses that don't come today.
-            let today = Local::today();
-            let now = Local::now();
+            let now = conf.after;
+            let today = conf.after.date();
             let day = today.weekday();
             let mut buses: Vec<_> = buses
                 .iter()
@@ -343,18 +361,6 @@ impl Data {
                         .calendar
                         .get(&trip.service_id)
                         .expect("Service id not found");
-
-                    fn to_local(naive: NaiveDate) -> Date<Local> {
-                        Local::today()
-                            .timezone()
-                            .from_local_date(&naive)
-                            .single()
-                            .expect("ambiguous date")
-                    }
-
-                    fn to_local_time(naive: NaiveTime) -> DateTime<Local> {
-                        Local::today().and_time(naive).expect("invalid date/time")
-                    }
 
                     // Check that today is in the range and on the right day of the week and not
                     // during an exception.
@@ -385,6 +391,10 @@ impl Data {
                 .collect();
 
             buses.sort_by_key(|(_, _, time)| time.clone());
+
+            if let Some(len) = conf.how_many {
+                buses.truncate(len);
+            }
 
             Ok(StopBusInfo {
                 stop_name: stop.stop_name.clone(),
@@ -422,6 +432,11 @@ fn main() -> Result<(), failure::Error> {
         (@subcommand stop =>
             (about: "lists the next scheduled buses at the given stop")
             (@arg STOP: +required "The stop ID")
+            (@arg WHEN: +takes_value --after -a {is_time}
+             "List stops at or after the given time (local to Madison) today \
+             (HH:MM, 24-hour clock).")
+            (@arg N: +takes_value --next -n {is_usize}
+             "List the next N buses.")
         )
         (@subcommand search =>
             (about: "Searches for all bus stops that contain the given string")
@@ -438,7 +453,25 @@ fn main() -> Result<(), failure::Error> {
     match matches.subcommand() {
         ("stop", Some(sub_m)) => {
             let stop = sub_m.value_of("STOP").unwrap();
-            let bus_info = data.stop_sched(stop)?;
+
+            let mut filter = FilterConfig::new(stop);
+
+            if let Some(after) = sub_m.value_of("WHEN") {
+                filter = filter.after(
+                    Local::today()
+                        .and_time(
+                            NaiveTime::parse_from_str(after, "%H:%M")
+                                .unwrap_or_else(|_| NaiveTime::from_hms(0, 0, 0)),
+                        )
+                        .expect("invalid date/time"),
+                );
+            }
+
+            if let Some(n) = sub_m.value_of("N") {
+                filter = filter.how_many(n.parse::<usize>().unwrap());
+            }
+
+            let bus_info = data.stop_sched(filter)?;
 
             println!("{}", bus_info.stop_name);
             for (bus, headsign, time) in bus_info.buses.iter() {
@@ -462,4 +495,22 @@ fn main() -> Result<(), failure::Error> {
     }
 
     Ok(())
+}
+
+fn is_usize(s: String) -> Result<(), String> {
+    s.as_str()
+        .parse::<usize>()
+        .map(|_| ())
+        .map_err(|e| format!("{:?}", e))
+}
+
+fn is_time(s: String) -> Result<(), String> {
+    let naive = NaiveTime::parse_from_str(&s, "%H:%M")
+        .map_err(|e| format!("Could not parse time: {}", e))?;
+
+    if Local::today().and_time(naive).is_none() {
+        Err("Ambiguous time".into())
+    } else {
+        Ok(())
+    }
 }
