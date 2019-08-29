@@ -405,14 +405,17 @@ impl Data {
         }
     }
 
-    pub fn search(&self, string: &str) -> Vec<(String, String)> {
-        let string = string.to_lowercase();
+    pub fn search(&self, string: Vec<&str>) -> Vec<(String, String)> {
+        let strings: Vec<_> = string.iter().map(|s| s.to_lowercase()).collect();
 
         let mut stops: Vec<(String, String)> = self
             .stops
             .values()
             .filter_map(|stop| {
-                if stop.stop_name.to_lowercase().contains(&string) {
+                if strings
+                    .iter()
+                    .all(|string| stop.stop_name.to_lowercase().contains(string))
+                {
                     Some((stop.stop_id.clone(), stop.stop_name.clone()))
                 } else {
                     None
@@ -440,7 +443,7 @@ fn main() -> Result<(), failure::Error> {
         )
         (@subcommand search =>
             (about: "Searches for all bus stops that contain the given string")
-            (@arg STR: +required "The string to search for")
+            (@arg STR: +required ... "The string(s) to search for")
         )
     }
     .setting(clap::AppSettings::SubcommandRequiredElseHelp)
@@ -483,8 +486,8 @@ fn main() -> Result<(), failure::Error> {
         }
 
         ("search", Some(sub_m)) => {
-            let string = sub_m.value_of("STR").unwrap();
-            let stops = data.search(string);
+            let strings = sub_m.values_of("STR").unwrap().collect();
+            let stops = data.search(strings);
 
             for (id, stop) in stops {
                 println!("{} {}", id, stop);
