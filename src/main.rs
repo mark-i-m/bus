@@ -563,8 +563,23 @@ fn main() -> Result<(), failure::Error> {
             }
 
             // Read the real time trip update.
-            let real_time_json = json::parse(&reqwest::get(TRIP_UPDATE_URL)?.text()?)?;
-            let real_time_info = parse_real_time_data(real_time_json)?;
+            let real_time_json_raw = reqwest::get(TRIP_UPDATE_URL)?.text();
+            let real_time_info = if let Ok(real_time_json_raw) = real_time_json_raw {
+                if let Ok(real_time_json) = json::parse(&real_time_json_raw) {
+                    if let Ok(real_time_json) = parse_real_time_data(real_time_json) {
+                        real_time_json
+                    } else {
+                        println!("WARNING: Unable to parse real-time data.");
+                        Default::default()
+                    }
+                } else {
+                    println!("WARNING: Unable to parse real-time data json.");
+                    Default::default()
+                }
+            } else {
+                println!("WARNING: Unable to fetch real-time data json.");
+                Default::default()
+            };
 
             let bus_info = data.stop_sched(filter, real_time_info)?;
 
