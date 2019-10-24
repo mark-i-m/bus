@@ -14,6 +14,10 @@ use failure::bail;
 
 use serde::Deserialize;
 
+/// The address of the trip update.
+pub const TRIP_UPDATE_URL: &str =
+    "http://transitdata.cityofmadison.com/TripUpdate/TripUpdates.json";
+
 #[derive(Debug, Clone, Deserialize)]
 struct Trip {
     route_id: String,
@@ -225,8 +229,8 @@ impl CalendarDate {
 
 struct StopBusInfo {
     stop_name: String,
-    // (trip_short_name, headsign, departure_time)
-    buses: Vec<(String, String, NaiveTime)>,
+    // (trip_short_name, headsign, departure_time, delay in seconds)
+    buses: Vec<(String, String, NaiveTime, Option<f64>)>,
 }
 
 struct FilterConfig<'s> {
@@ -328,8 +332,12 @@ impl Data {
         })
     }
 
-    /// Get buses at the stop matching the given filter.
-    pub fn stop_sched(&self, conf: FilterConfig) -> Result<StopBusInfo, failure::Error> {
+    /// Get buses at the stop matching the given filter and the real-time delay info.
+    pub fn stop_sched(
+        &self,
+        conf: FilterConfig,
+        real_time: HashMap<String, HashMap<String, f64>>,
+    ) -> Result<StopBusInfo, failure::Error> {
         fn to_local(naive: NaiveDate) -> Date<Local> {
             Local::today()
                 .timezone()
@@ -381,16 +389,26 @@ impl Data {
                     } else if to_local_time(bus.departure_time) < now {
                         None
                     } else {
+                        // Check for real-time delays.
+                        let delay = real_time
+                            .get(conf.stop_id)
+                            .iter()
+                            .flat_map(|stop| stop.get(&bus.trip_id).cloned())
+                            .next();
+
                         Some((
                             trip.route_short_name.clone(),
                             trip.trip_headsign.clone(),
                             bus.departure_time,
+                            delay,
                         ))
                     }
                 })
                 .collect();
 
-            buses.sort_by_key(|(_, _, time)| time.clone());
+            buses.sort_by_key(|(_, _, time, delay)| {
+                time.overflowing_add_signed(chrono::Duration::seconds(delay.unwrap_or(0.0) as i64))
+            });
 
             if let Some(len) = conf.how_many {
                 buses.truncate(len);
@@ -429,6 +447,75 @@ impl Data {
     }
 }
 
+macro_rules! warn_and_skip {
+    ($json:ident, $key:literal) => {{
+        if $json.has_key($key) {
+            $json.remove($key)
+        } else {
+            println!("Key {} not found in {}", $key, stringify!($json));
+            continue;
+        }
+    }};
+}
+
+// Hack your way through the real time data and produce by-stop-by-trip delay info.
+//
+// {stop_id: {trip_id: delay}}
+fn parse_real_time_data(
+    mut real_time_json: json::JsonValue,
+) -> Result<HashMap<String, HashMap<String, f64>>, failure::Error> {
+    assert!(real_time_json.has_key("entity"));
+
+    let mut by_stop_id_by_trip_id: HashMap<String, HashMap<String, f64>> = HashMap::new();
+
+    let mut entity = real_time_json.remove("entity");
+    for update in entity.members_mut() {
+        let mut trip_update = warn_and_skip!(update, "trip_update");
+        let mut trip = warn_and_skip!(trip_update, "trip");
+        let mut stop_time_update = warn_and_skip!(trip_update, "stop_time_update");
+        let trip_id = warn_and_skip!(trip, "trip_id")
+            .as_str()
+            .expect("expected str")
+            .to_owned();
+        let rolling_delay = 0.0;
+        for stop_time in stop_time_update.members_mut() {
+            let stop_id = warn_and_skip!(stop_time, "stop_id")
+                .as_str()
+                .expect("expected str")
+                .to_owned();
+            let mut departure = warn_and_skip!(stop_time, "departure");
+            let delay = if departure.has_key("delay") {
+                departure.remove("delay").as_f64().expect("expected usize")
+            } else {
+                rolling_delay
+            };
+
+            if delay > 0.0 {
+                by_stop_id_by_trip_id
+                    .entry(stop_id)
+                    .or_default()
+                    .insert(trip_id.clone(), delay);
+            }
+        }
+    }
+    Ok(by_stop_id_by_trip_id)
+}
+
+fn print_delay(delay: chrono::Duration) -> String {
+    if delay > chrono::Duration::minutes(1) {
+        let minutes = delay.num_minutes();
+        let seconds = delay.num_seconds() - minutes * 60;
+        if seconds > 0 {
+            format!("{}m {}s", minutes, seconds)
+        } else {
+            format!("{}m", minutes)
+        }
+    } else {
+        let seconds = delay.num_seconds();
+        format!("{}s", seconds)
+    }
+}
+
 fn main() -> Result<(), failure::Error> {
     let matches = clap_app! { bus =>
         (about: "Info about scheduled buses.")
@@ -449,10 +536,11 @@ fn main() -> Result<(), failure::Error> {
     .setting(clap::AppSettings::SubcommandRequiredElseHelp)
     .get_matches();
 
+    // Read the static bus schedule data.
     let data_dir = std::env::var("BUS_DATA").unwrap_or("data".into());
-
     let data = Data::read(&data_dir)?;
 
+    // Do computations and print stuff.
     match matches.subcommand() {
         ("stop", Some(sub_m)) => {
             let stop = sub_m.value_of("STOP").unwrap();
@@ -474,11 +562,28 @@ fn main() -> Result<(), failure::Error> {
                 filter = filter.how_many(n.parse::<usize>().unwrap());
             }
 
-            let bus_info = data.stop_sched(filter)?;
+            // Read the real time trip update.
+            let real_time_json = json::parse(&reqwest::get(TRIP_UPDATE_URL)?.text()?)?;
+            let real_time_info = parse_real_time_data(real_time_json)?;
+
+            let bus_info = data.stop_sched(filter, real_time_info)?;
 
             println!("{}", bus_info.stop_name);
-            for (bus, headsign, time) in bus_info.buses.iter() {
-                println!("{} {} {}", time.format("%l:%M %p"), bus, headsign,);
+            for (bus, headsign, time, delay) in bus_info.buses.iter() {
+                println!(
+                    "{} {:17} {}  {}",
+                    time.format("%l:%M %p"),
+                    if let Some(delay) = delay {
+                        format!(
+                            "delayed {}",
+                            print_delay(chrono::Duration::seconds(*delay as i64))
+                        )
+                    } else {
+                        "".into()
+                    },
+                    bus,
+                    headsign,
+                )
             }
             if bus_info.buses.is_empty() {
                 println!("[No more buses today]");
