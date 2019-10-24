@@ -1,7 +1,8 @@
 A hacky program to give schedule information for Madison Metro buses.
 
-This program only uses schedule data, not real-time updates, which are
-offered by MMT via a different API.
+This program uses schedule data and accesses the real-time data, which are
+offered by MMT. If there is no internet access, one will see a warning and only
+the static scheduling info is displayed.
 
 Using this program implies that you accept MMT's Terms here:
 http://transitdata.cityofmadison.com/MetroTransitDataTermsOfUse.pdf
