@@ -245,6 +245,9 @@ struct FilterConfig<'s> {
 
     /// How many buses to list?
     how_many: Option<usize>,
+
+    /// Which route to list? If none, list all.
+    route: Option<&'s str>,
 }
 
 impl<'s> FilterConfig<'s> {
@@ -253,6 +256,7 @@ impl<'s> FilterConfig<'s> {
             stop_id,
             after: Local::now(),
             how_many: None,
+            route: None,
         }
     }
 
@@ -263,6 +267,13 @@ impl<'s> FilterConfig<'s> {
     pub fn how_many(self, how_many: usize) -> Self {
         Self {
             how_many: Some(how_many),
+            ..self
+        }
+    }
+
+    pub fn route(self, route: &'s str) -> Self {
+        Self {
+            route: Some(route),
             ..self
         }
     }
@@ -372,6 +383,13 @@ impl Data {
                         .calendar
                         .get(&trip.service_id)
                         .expect("Service id not found");
+
+                    // Filter routes.
+                    if let Some(route) = conf.route {
+                        if trip.route_short_name != route.to_string() {
+                            return None;
+                        }
+                    }
 
                     // Check that today is in the range and on the right day of the week and not
                     // during an exception.
@@ -530,6 +548,8 @@ fn main() -> Result<(), failure::Error> {
              (HH:MM, 24-hour clock).")
             (@arg N: +takes_value --next -n {is_usize}
              "List the next N buses.")
+            (@arg ROUTE: +takes_value --route -r {is_usize}
+             "List only busses taking route ROUTE.")
         )
         (@subcommand search =>
             (about: "Searches for all bus stops that contain the given string")
@@ -567,6 +587,10 @@ fn main() -> Result<(), failure::Error> {
                     .map(|n| n.parse::<usize>().unwrap())
                     .unwrap_or(DEFAULT_N),
             );
+
+            if let Some(route) = sub_m.value_of("ROUTE") {
+                filter = filter.route(route);
+            }
 
             // Read the real time trip update.
             let real_time_json_raw = reqwest::get(TRIP_UPDATE_URL)?.text();
