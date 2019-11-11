@@ -18,6 +18,9 @@ use serde::Deserialize;
 pub const TRIP_UPDATE_URL: &str =
     "http://transitdata.cityofmadison.com/TripUpdate/TripUpdates.json";
 
+/// The default number of busses to show for a stop.
+pub const DEFAULT_N: usize = 10;
+
 #[derive(Debug, Clone, Deserialize)]
 struct Trip {
     route_id: String,
@@ -558,9 +561,12 @@ fn main() -> Result<(), failure::Error> {
                 );
             }
 
-            if let Some(n) = sub_m.value_of("N") {
-                filter = filter.how_many(n.parse::<usize>().unwrap());
-            }
+            filter = filter.how_many(
+                sub_m
+                    .value_of("N")
+                    .map(|n| n.parse::<usize>().unwrap())
+                    .unwrap_or(DEFAULT_N),
+            );
 
             // Read the real time trip update.
             let real_time_json_raw = reqwest::get(TRIP_UPDATE_URL)?.text();
