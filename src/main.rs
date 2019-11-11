@@ -505,7 +505,7 @@ fn parse_real_time_data(
 }
 
 fn print_delay(delay: chrono::Duration) -> String {
-    if delay > chrono::Duration::minutes(1) {
+    if delay >= chrono::Duration::minutes(1) {
         let minutes = delay.num_minutes();
         let seconds = delay.num_seconds() - minutes * 60;
         if seconds > 0 {
@@ -592,11 +592,11 @@ fn main() -> Result<(), failure::Error> {
             println!("{}", bus_info.stop_name);
             for (bus, headsign, time, delay) in bus_info.buses.iter() {
                 println!(
-                    "{} {:17} {}  {}",
+                    "{} {:10} {}  {}",
                     time.format("%l:%M %p"),
                     if let Some(delay) = delay {
                         format!(
-                            "delayed {}",
+                            "+ {}",
                             print_delay(chrono::Duration::seconds(*delay as i64))
                         )
                     } else {
