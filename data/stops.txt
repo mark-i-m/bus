@@ -18,42 +18,6 @@ stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,agency_id,jurisdiction_i
 7100,7100,East Transfer Point,This stop (#7100) is on the pedestrian island at the East Transfer Point station,43.098619,-89.322148,MMT,MTSM,0,7000,5,,1,East Transfer Point,102,W Corporate
 9000,9800,East Towne Mall,The East Towne Mall station is located eastbound at 89 E Towne Mall - just southeast of E Towne Blvd and Independence Ln,43.126161,-89.307135,MMT,PRIV,1,,5,90,1,East Towne Mall,89,E Towne
 9800,9800,E Towne Mall & Shelter (EB),This stop (#9800) is eastbound on the pedestrian island at East Towne Mall,43.126576,-89.306961,MMT,PRIV,0,9000,5,90,1,East Towne Mall,89,E Towne
-73,0073,W Dayton & E Campus (EB),This stop (#0073) is eastbound on the 799 block of Dayton St (w) farside East Campus Mall,43.07082,-89.39865,MMT,CMAD,0,,1,90,1,W Dayton,799,E Campus
-77,0077,W Dayton & N Park (EB),This stop (#0077) is eastbound on the 901 block of Dayton St (w) nearside Park St (n),43.070857,-89.401119,MMT,CMAD,0,,3,90,1,W Dayton,901,N Park
-703,0703,S Park & Burr Oak (NB),This stop (#0703) is northbound on the 2001 block of Park St (s) nearside Burr Oak Ln,43.044015,-89.393797,MMT,CMAD,0,,3,0,1,S Park,2001,Burr Oak
-815,0815,Koster & Ardmore (EB),This stop (#0815) is eastbound on the 201 block of Koster St nearside Ardmore Dr,43.044085,-89.3859,MMT,CMAD,0,,3,90,1,Koster,201,Ardmore
-875,0875,Bram & Koster (EB),This stop (#0875) is eastbound on the 401 block of Bram St nearside Koster St,43.045572,-89.388935,MMT,CMAD,0,,3,90,0,Bram,401,Koster
-1264,1264,Winnebago & Sutherland (SB),This stop (#1264) is southbound on the 2044 block of Winnebago St nearside Sutherland Ct,43.093375,-89.354286,MMT,CMAD,0,,3,180,0,Winnebago,2044,Sutherland
-1494,1494,E Washington & N Dickinson (WB),This stop (#1494) is westbound on the 1400 block of E Washington Ave nearside Dickinson St (n),43.088796,-89.364515,MMT,CMAD,0,,3,270,1,E Washington,1400,N Dickinson
-1595,1595,E Johnson & N Thorton (EB),This stop (#1595) is eastbound on the 1499 block of Johnson St (e) nearside Thornton Ave (n),43.091706,-89.365698,MMT,CMAD,0,,3,90,1,E Johnson,1499,N Thorton
-1805,1805,E Washington & S Dickinson (EB),This stop (#1805) is eastbound on the 1399 block of E Washington Ave nearside Dickinson St (s),43.088339,-89.364429,MMT,CMAD,0,,3,90,1,E Washington,1399,S Dickinson
-1847,1847,N First & E Mifflin (NB),This stop (#1847) is northbound on the 101 block of First St (n) farside Mifflin St (e),43.093235,-89.360634,MMT,CMAD,0,,1,0,1,N First,101,E Mifflin
-2396,2396,S Segoe & Mineral Point (SB),This stop (#2396) is southbound on the 398 block of Segoe Rd (s) nearside Mineral Point Rd,43.061033,-89.457786,MMT,CMAD,0,,3,180,0,S Segoe,398,Mineral Point
-4320,4320,Watford & Post (SB),This stop (#4320) is southbound on the 3398 block of Watford Way nearside Post Rd,43.02682,-89.401293,MMT,CMAD,0,,3,180,0,Watford,3398,Post
-6132,6132,University & Park Lawn (WB),This stop (#6132) is westbound on the 7100 block of University Ave farside Park Lawn Pl,43.097119,-89.504644,MMT,CMID,0,,1,270,0,University,7100,Park Lawn
-6156,6156,University & Middleton (WB),This stop (#6156) is westbound on the 7400 block of University Ave farside Middleton St,43.097027,-89.508682,MMT,CMID,0,,1,270,0,University,7400,Middleton
-6273,6273,Junction & Harbour Town (NB),This stop (#6273) is northbound on the 401 block of Junction Rd farside Harbour Town Dr,43.068707,-89.524065,MMT,CMAD,0,,1,0,1,Junction,401,Harbour Town
-6337,6337,University & Park Lawn (EB),This stop (#6337) is eastbound on the 7101 block of University Ave nearside Park Lawn Pl,43.096905,-89.504348,MMT,CMID,0,,3,90,0,University,7101,Park Lawn
-6385,6385,Old Sauk & Junction (EB),This stop (#6385) is eastbound on the 8301 block of Old Sauk Rd nearside Junction Rd,43.074703,-89.527246,MMT,CMAD,0,,3,90,0,Old Sauk,8301,Junction
-6647,6647,University & Middleton (EB),This stop (#6647) is eastbound on the 7399 block of University Ave farside Middleton St,43.096822,-89.507929,MMT,CMID,0,,1,90,0,University,7399,Middleton
-6812,6812,Junction & Harbour Town (SB),This stop (#6812) is southbound on the 400 block of Junction Rd nearside Harbour Town Dr,43.068456,-89.524435,MMT,CMAD,0,,3,180,0,Junction,400,Harbour Town
-6881,6881,Park & Elmwood (NB),This stop (#6881) is northbound on the 1899 block of Park St nearside Elmwood Ave,43.095993,-89.501593,MMT,CMID,0,,3,0,0,Park,1899,Elmwood
-7559,7559,Buckeye & Lakeview (EB),This stop (#7559) is eastbound on the 4399 block of Buckeye Rd nearside Lakeview Ave (w),43.075212,-89.317998,MMT,CMAD,0,,3,90,0,Buckeye,4399,Lakeview
-8151,8151,Muir Field & Tempe (NB),This stop (#8151) is northbound on the 3145 block of Muir Field Rd nearside Tempe Dr,43.017402,-89.509879,MMT,CMAD,0,,3,0,0,Muir Field,3145,Tempe
-8196,8196,Muir Field & Tempe (SB),This stop (#8196) is southbound on the 3122 block of Muir Field Rd farside Tempe Dr,43.017617,-89.510064,MMT,CMAD,0,,1,180,0,Muir Field,3122,Tempe
-8262,8262,Woods & Silverstone (SB),This stop (#8262) is southbound on the 1998 block of Woods Rd opposite Silverstone Ln,43.029953,-89.553037,MMT,CMAD,0,,4,180,0,Woods,1998,Silverstone
-8275,8275,Woods & Silverstone (NB),This stop (#8275) is northbound on the 2001 block of Woods Rd nearside Silverstone Ln,43.029819,-89.552741,MMT,CMAD,0,,3,0,0,Woods,2001,Silverstone
-8283,8283,Raymond & Tawhee (EB),This stop (#8283) is eastbound on the 5301 block of Raymond Rd nearside Tawhee Dr,43.031674,-89.470331,MMT,CMAD,0,,3,90,1,Raymond,5301,Tawhee
-8310,8310,Struck & Schroeder (SB),This stop (#8310) is southbound on the 898 block of Struck St nearside Schroeder Rd,43.046406,-89.496662,MMT,CMAD,0,,3,180,1,Struck,898,Schroeder
-8384,8384,Mid Town & Hawks Landing (WB),This stop (#8384) is westbound on the 9200 block of Mid Town Rd nearside Hawks Landing Cir,43.03134,-89.544675,MMT,CMAD,0,,3,270,0,Mid Town,9200,Hawks Landing
-8439,8439,Waldorf & Mansion Hill (NB),This stop (#8439) is northbound on the 1701 block of Waldorf Blvd nearside Mansion Hill Ave,43.034015,-89.525112,MMT,CMAD,0,,3,0,0,Waldorf,1701,Mansion Hill
-8480,8480,Muir Field & Lancaster (SB),This stop (#8480) is southbound on the 2798 block of Muir Field Rd nearside Lancaster Ln,43.02266,-89.505617,MMT,CMAD,0,,3,180,0,Muir Field,2798,Lancaster
-8675,8675,Muir Field & Cimarron (NB),This stop (#8675) is northbound on the 3021 block of Muir Field Rd nearside Cimarron Trl,43.019041,-89.508105,MMT,CMAD,0,,3,0,0,Muir Field,3021,Cimarron
-8836,8836,Muir Field & Cimarron (SB),This stop (#8836) is southbound on the 3018 block of Muir Field Rd farside Cimarron Trl,43.01871,-89.508573,MMT,CMAD,0,,1,180,0,Muir Field,3018,Cimarron
-8920,8920,Reetz & Marvin (SB),This stop (#8920) is southbound on the 1500 block of Reetz Rd farside Marvin Ave,43.036081,-89.461204,MMT,CMAD,0,,1,180,0,Reetz,1500,Marvin
-8927,8927,Mid Town & Hawks Landing (EB),This stop (#8927) is eastbound on the 9199 block of Mid Town Rd nearside Hawks Landing Cir,43.031124,-89.545057,MMT,CMAD,0,,3,90,0,Mid Town,9199,Hawks Landing
-9134,9134,Hayes & Portage (WB),This stop (#9134) is westbound on the 4600 block of Hayes Rd nearside Portage Rd,43.142809,-89.305982,MMT,CMAD,0,,3,270,1,Hayes,4600,Portage
-9501,9501,High Crossing & Cross Hill (EB),This stop (#9501) is eastbound on the 5499 block of High Crossing Blvd nearside Cross Hill Dr,43.142573,-89.284234,MMT,CMAD,0,,3,90,1,High Crossing,5499,Cross Hill
 5,0005,W Dayton & N Orchard (EB),This stop (#0005) is eastbound on the 1299 block of Dayton St (W) farside Orchard St (N),43.070947,-89.406982,MMT,CMAD,0,,1,90,1,W Dayton,1299,N Orchard
 10,0010,Langdon & N Park (WB),This stop (#0010) is westbound on the 898 block of Langdon St nearside Park St (N),43.075933,-89.400154,MMT,CMAD,0,,3,270,1,Langdon,898,N Park
 25,0025,Langdon & N Lake (EB),This stop (#0025) is eastbound on the 699 block of Langdon St farside Lake St (N),43.075691,-89.396944,MMT,CMAD,0,,1,90,1,Langdon,699,N Lake
@@ -978,7 +942,7 @@ stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,agency_id,jurisdiction_i
 4520,4520,E Cheryl & Agrace (WB),This stop (#4520) is westbound on the 5400 block of E Cheryl Pkwy opposite Agrace Campus,43.005095,-89.417024,MMT,CFIT,0,,4,270,0,E Cheryl,5400,Agrace
 4522,4522,Chapel Valley & Mckee (SB),This stop (#4522) is southbound on the 2951 block of Chapel Valley Rd farside Mckee Rd,43.015156,-89.432046,MMT,CFIT,0,,1,180,0,Chapel Valley,2951,Mckee
 4523,4523,Fish Hatchery & Post (NB),This stop (#4523) is northbound on the 2925 block of Fish Hatchery Rd farside Post Rd,43.026722,-89.41226,MMT,CFIT,0,,1,0,1,Fish Hatchery,2925,Post
-4539,4539,Beltline S & Higway Ramp (EB),This stop (#4539) is eastbound on the 4199 block of Beltline Frontage (S) nearside Highway Ramp,43.034367,-89.443227,MMT,CMAD,0,,3,90,1,Beltline S,4199,Seminole
+4539,4539,Beltline S & Highway Ramp (EB),This stop (#4539) is eastbound on the 4199 block of Beltline Frontage (S) nearside Highway Ramp,43.034367,-89.443227,MMT,CMAD,0,,3,90,1,Beltline S,4199,Highway Ramp
 4541,4541,Fitchrona & Kapec (EB),This stop (#4541) is eastbound on the 3030 block of Fitchrona Rd farside Kapec Rd,43.018718,-89.475503,MMT,CFIT,0,,1,90,1,Fitchrona,3030,Kapec
 4550,4550,Research Park & E Cheryl (SB),This stop (#4550) is southbound on the 2799 block of Research Park Dr farside E Cheryl Pkwy,43.004772,-89.425459,MMT,CFIT,0,,1,180,0,Research Park,2799,E Cheryl
 4551,4551,S Midvale & Cherokee (NB),This stop (#4551) is northbound on the 1001 block of Midvale Blvd (S) nearside Cherokee Dr,43.042324,-89.450879,MMT,CMAD,0,,3,0,1,S Midvale,1001,Cherokee
@@ -1971,13 +1935,13 @@ stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,agency_id,jurisdiction_i
 9144,9144,Anniversary & Forest Run (SB),This stop (#9144) is southbound on the 4801 block of Anniversary Ln farside Forest Run Rd,43.135167,-89.301992,MMT,CMAD,0,,1,180,1,Anniversary,4801,Forest Run
 9146,9146,Melody & Portage (WB),This stop (#9146) is westbound on the 4000 block of Melody Ln nearside Portage Rd,43.130908,-89.31538,MMT,CMAD,0,,3,270,1,Melody,4000,Portage
 9147,9147,Eastpark & Park And Ride (NB),This stop (#9147) is northbound on the 5601 block of Eastpark Blvd adjacent Park And Ride Lot,43.148458,-89.286545,MMT,CMAD,0,,2,0,1,Eastpark,5601,Park And Ride
-9148,9148,Blue Aster & Grand (WB),This stop (#9148) is westbound on the 2600 block of Blue Aster Blvd farside Grand Ave,43.171786,-89.265569,MMT,CSUN,0,,1,270,0,Blue Aster,2600,Grand
+9148,9148,Blue Aster & Grand (WB),This stop (#9148) is westbound on the 2600 block of Blue Aster Blvd farside Grand Ave,43.171786,-89.265569,MMT,CSUN,0,,1,270,1,Blue Aster,2600,Grand
 9152,9152,E Washington & Portage (WB),This stop (#9152) is westbound on the 4000 block of E Washington Ave farside Portage Rd,43.123226,-89.315478,MMT,CMAD,0,,1,270,1,E Washington,4000,Portage
 9153,9153,Hayes & Dawn (EB),This stop (#9153) is eastbound on the 4726 block of Hayes Rd nearside Dawn Rd,43.140977,-89.300548,MMT,CMAD,0,,3,90,1,Hayes,4726,Dawn
 9154,9154,Portage & Tomscot (SB),This stop (#9154) is southbound on the 3500 block of Portage Rd nearside Tomscot Trl,43.138723,-89.312933,MMT,CMAD,0,,3,180,1,Portage,3500,Tomscot
 9161,9161,E Washington N & E Springs (EB),This stop (#9161) is eastbound on the 4700 block of E Washington Frontage nearside East Springs Dr,43.131257,-89.304049,MMT,CMAD,0,,3,90,1,E Washington N,4700,E Springs
 9163,9163,E Washington & Independence (EB),This stop (#9163) is eastbound on the 4501 block of E Washington Ave farside Independence Ln,43.128037,-89.307786,MMT,CMAD,0,,1,90,1,E Washington,4501,Independence
-9164,9164,O'Keeffe & Linnerud (SB),This stop (#9164) is southbound on the 600 block of O'Keeffe Ave farside Linnerud Dr,43.173927,-89.245178,MMT,CSUN,0,,1,180,0,O'Keeffe,600,Linnerud
+9164,9164,O'Keeffe & Linnerud (SB),This stop (#9164) is southbound on the 600 block of O'Keeffe Ave farside Linnerud Dr,43.173927,-89.245178,MMT,CSUN,0,,1,180,1,O'Keeffe,600,Linnerud
 9167,9167,Swanton & Milwaukee (NB),This stop (#9167) is northbound on the 1 block of Swanton Rd farside Milwaukee St,43.099138,-89.301462,MMT,CMAD,0,,1,0,1,Swanton,1,Milwaukee
 9168,9168,International & Darwin (SB),This stop (#9168) is southbound on the 3098 block of International Ln farside Darwin Rd,43.128496,-89.348803,MMT,CMAD,0,,1,180,1,International,3098,Darwin
 9169,9169,Airport & Terminal Door 6 (NB),This stop (#9169) is northbound on the 4000 block of Airport Commercial Ln adjacent Terminal Door Six,43.137305,-89.346446,MMT,PRIV,0,,2,0,1,Airport,4000,Terminal Door 6
@@ -2000,7 +1964,7 @@ stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,agency_id,jurisdiction_i
 9204,9204,N Thompson & Lien (SB),This stop (#9204) is southbound on the 1698 block of Thompson Dr (N) farside Lien Rd,43.120606,-89.298892,MMT,CMAD,0,,1,180,1,N Thompson,1698,Lien
 9207,9207,Dwight & Independence (EB),This stop (#9207) is eastbound on the 4499 block of Dwight Dr nearside Independence Ln,43.12888,-89.309626,MMT,CMAD,0,,3,90,1,Dwight,4499,Independence
 9211,9211,Forest Run & Forest Ridge (NB),This stop (#9211) is northbound on the 4701 block of Forest Run Rd farside Forest Ridge Way,43.137094,-89.303236,MMT,CMAD,0,,1,0,1,Forest Run,4701,Forest Ridge
-9219,9219,O'Keeffe & Summerfield (EB),This stop (#9219) is eastbound on the 1099 block of O'Keeffe Ave farside Summerfield Way,43.169044,-89.249752,MMT,CSUN,0,,1,90,0,O'Keeffe,1099,Summerfield
+9219,9219,O'Keeffe & Summerfield (EB),This stop (#9219) is eastbound on the 1099 block of O'Keeffe Ave farside Summerfield Way,43.169044,-89.249752,MMT,CSUN,0,,1,90,1,O'Keeffe,1099,Summerfield
 9220,9220,Lien & Eagan (WB),This stop (#9220) is westbound on the 4298 block of Lien Rd farside Eagan Rd,43.121106,-89.307687,MMT,CMAD,0,,1,270,1,Lien,4298,Eagan
 9225,9225,E Washington & Schmedeman (EB),This stop (#9225) is eastbound on the 3531 block of E Washington Ave nearside Schmedeman Ave,43.115141,-89.326941,MMT,CMAD,0,,3,90,1,E Washington,3531,Schmedeman
 9226,9226,Independence & East Towne (SB),This stop (#9226) is southbound on the 1800 block of Independence Ln nearside E Towne Bl,43.127356,-89.30759,MMT,CMAD,0,,3,180,1,Independence,1800,East Towne
@@ -2053,11 +2017,11 @@ stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,agency_id,jurisdiction_i
 9396,9396,Hayes & Morningside (WB),This stop (#9396) is westbound on the 4652 block of Hayes Rd opposite Morningside/green,43.142519,-89.302918,MMT,CMAD,0,,4,270,1,Hayes,4652,Morningside
 9405,9405,Wright & E Washington (NB),This stop (#9405) is northbound on the 1401 block of Wright St farside E Washington Ave,43.113962,-89.330488,MMT,CMAD,0,,1,0,1,Wright,1401,E Washington
 9412,9412,Crossroads & 2910 (SB),This stop (#9412) is southbound on the 2910 block of Crossroads Dr adjacent 2910 Crossroads Driveway,43.13435,-89.290478,MMT,CMAD,0,,2,180,1,Crossroads,2910,2910
-9418,9418,Hoepker & Prairie Lakes (SB),This stop (#9418) is southbound on the 2900 block of Hoepker Rd farside Prairie Lakes Dr,43.166127,-89.27295,MMT,CSUN,0,,1,180,0,Hoepker,2900,Prairie Lakes
+9418,9418,Hoepker & Prairie Lakes (SB),This stop (#9418) is southbound on the 2900 block of Hoepker Rd farside Prairie Lakes Dr,43.166127,-89.27295,MMT,CSUN,0,,1,180,1,Hoepker,2900,Prairie Lakes
 9420,9420,N Thompson & Golden Leaf (SB),This stop (#9420) is southbound on the 920 block of Thompson Dr (N) nearside Golden Leaf Trl,43.111937,-89.296351,MMT,CMAD,0,,3,180,1,N Thompson,920,Golden Leaf
 9422,9422,East Towne & Independence (WB),This stop (#9422) is westbound on the 4500 block of East Towne Blvd nearside Independence Ln,43.12749,-89.307342,MMT,CMAD,0,,3,270,1,East Towne,4500,Independence
 9432,9432,Lien & Zeier (WB),This stop (#9432) is westbound on the 4698 block of Lien Rd farside Zeier Rd,43.121163,-89.30046,MMT,CMAD,0,,1,270,1,Lien,4698,Zeier
-9437,9437,O'Keeffe & Linnerud (NB),This stop (#9437) is northbound on the 599 block of O'Keeffe Ave farside Linnerud Dr,43.174491,-89.244818,MMT,CSUN,0,,1,0,0,O'Keeffe,599,Linnerud
+9437,9437,O'Keeffe & Linnerud (NB),This stop (#9437) is northbound on the 599 block of O'Keeffe Ave farside Linnerud Dr,43.174491,-89.244818,MMT,CSUN,0,,1,0,1,O'Keeffe,599,Linnerud
 9438,9438,Anderson & Wright (WB),This stop (#9438) is westbound on the 3400 block of Anderson St nearside Wright St,43.120238,-89.329504,MMT,CMAD,0,,3,270,1,Anderson,3400,Wright
 9439,9439,N Thompson & Jana (NB),This stop (#9439) is northbound on the 801 block of Thompson Dr (N) farside Jana Ln,43.108626,-89.298765,MMT,CMAD,0,,1,0,1,N Thompson,801,Jana
 9442,9442,Eagan & E Washington (SB),This stop (#9442) is southbound on the 1798 block of Eagan Rd farside E Washington Ave,43.126123,-89.310211,MMT,CMAD,0,,1,180,1,Eagan,1798,E Washington
@@ -2083,7 +2047,7 @@ stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,agency_id,jurisdiction_i
 9528,9528,O'Keeffe & Prairie (WB),This stop (#9528) is westbound on the 850 block of O'Keeffe Ave nearside Prairie Run,43.171594,-89.248151,MMT,CSUN,0,,3,270,0,O'Keeffe,850,Prairie
 9531,9531,Lien & Eagan (EB),This stop (#9531) is eastbound on the 4301 block of Lien Rd farside Eagan Rd,43.120882,-89.306933,MMT,CMAD,0,,1,90,1,Lien,4301,Eagan
 9532,9532,Anderson & Pearson (WB),This stop (#9532) is westbound on the 3100 block of Anderson St nearside Pearson St,43.120655,-89.337039,MMT,CMAD,0,,3,270,0,Anderson,3100,Pearson
-9535,9535,Grand & Blue Aster (NB),This stop (#9535) is northbound on the 399 block of Grand Ave farside Blue Aster Blvd,43.171947,-89.264765,MMT,CSUN,0,,1,0,0,Grand,399,Blue Aster
+9535,9535,Grand & Blue Aster (NB),This stop (#9535) is northbound on the 399 block of Grand Ave farside Blue Aster Blvd,43.171947,-89.264765,MMT,CSUN,0,,1,0,1,Grand,399,Blue Aster
 9539,9539,Crossroads & City View (NB),This stop (#9539) is northbound on the 2201 block of Crossroads Dr farside City View Dr,43.12929,-89.288943,MMT,CMAD,0,,1,0,1,Crossroads,2201,City View
 9543,9543,O'Keeffe & Wild Iris (NB),This stop (#9543) is northbound on the 1601 block of O'Keeffe Ave nearside Wild Iris St,43.15949,-89.263496,MMT,CSUN,0,,3,0,0,O'Keeffe,1601,Wild Iris
 9545,9545,Melody & Independence (EB),This stop (#9545) is eastbound on the 4399 block of Melody Ln nearside Independence Ln,43.130465,-89.310228,MMT,CMAD,0,,3,90,1,Melody,4399,Independence
@@ -2105,12 +2069,12 @@ stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,agency_id,jurisdiction_i
 9604,9604,N Thompson & Meadows (WB),This stop (#9604) is westbound on the 401 block of Thompson Dr (N) adjacent Meadows,43.102625,-89.296084,MMT,CMAD,0,,2,270,1,N Thompson,401,Meadows
 9615,9615,Crossroads & Wall (NB),This stop (#9615) is northbound on the 2501 block of Crossroads Dr farside Wall St,43.132398,-89.290345,MMT,CMAD,0,,1,0,1,Crossroads,2501,Wall
 9620,9620,E Springs & Plumbers 75 (WB),This stop (#9620) is westbound on the 2100 block of East Springs Dr adjacent Plumbers Local 75,43.126565,-89.294681,MMT,CMAD,0,,2,270,1,E Springs,2100,Plumbers 75
-9621,9621,O'Keeffe & Brown Bear (EB),This stop (#9621) is eastbound on the 1301 block of O'Keeffe Ave farside Brown Bear Way,43.165738,-89.255113,MMT,CSUN,0,,1,90,0,O'Keeffe,1301,Brown Bear
+9621,9621,O'Keeffe & Brown Bear (EB),This stop (#9621) is eastbound on the 1301 block of O'Keeffe Ave farside Brown Bear Way,43.165738,-89.255113,MMT,CSUN,0,,1,90,1,O'Keeffe,1301,Brown Bear
 9629,9629,Nakoosa & Commercial (EB),This stop (#9629) is eastbound on the 4101 block of Nakoosa Trl farside Commercial Ave,43.10838,-89.314377,MMT,CMAD,0,,1,90,1,Nakoosa,4101,Commercial
 9630,9630,American & Buttonwood (SB),This stop (#9630) is southbound on the 4898 block of American Pkwy farside Buttonwood Dr,43.150261,-89.290014,MMT,CMAD,0,,1,180,1,American,4898,Buttonwood
 9633,9633,Hayes & Portage (EB),This stop (#9633) is eastbound on the 4601 block of Hayes Rd farside Portage Rd,43.14254,-89.305995,MMT,CMAD,0,,1,90,1,Hayes,4601,Portage
 9636,9636,N Thompson & Oak Valley (SB),This stop (#9636) is southbound on the 1200 block of Thompson Dr (N) nearside Oak Valley Dr,43.11593,-89.296467,MMT,CMAD,0,,3,180,1,N Thompson,1200,Oak Valley
-9639,9639,Hoepker & Prairie Lakes (NB),This stop (#9639) is northbound on the 2899 block of Hoepker Rd farside Prairie Lakes Dr,43.166431,-89.27217,MMT,CSUN,0,,1,0,0,Hoepker,2899,Prairie Lakes
+9639,9639,Hoepker & Prairie Lakes (NB),This stop (#9639) is northbound on the 2899 block of Hoepker Rd farside Prairie Lakes Dr,43.166431,-89.27217,MMT,CSUN,0,,1,0,1,Hoepker,2899,Prairie Lakes
 9642,9642,Wright & Straubel (SB),This stop (#9642) is southbound on the 1598 block of Wright St nearside Straubel St,43.117167,-89.330718,MMT,CMAD,0,,3,180,1,Wright,1598,Straubel
 9645,9645,N Thompson & Oak Valley (NB),This stop (#9645) is northbound on the 1201 block of Thompson Dr (N) farside Oak Valley Dr,43.116154,-89.296343,MMT,CMAD,0,,1,0,1,N Thompson,1201,Oak Valley
 9651,9651,Eastpark & U W Health (EB),This stop (#9651) is eastbound on the 4651 block of Eastpark Blvd opposite U W Health American Center,43.153513,-89.301094,MMT,CMAD,0,,4,90,1,Eastpark,4651,U W Health
@@ -2130,7 +2094,7 @@ stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,agency_id,jurisdiction_i
 9723,9723,Portage & Rieder (NB),This stop (#9723) is northbound on the 3001 block of Portage Rd farside Rieder Rd,43.135761,-89.31552,MMT,CMAD,0,,1,0,1,Portage,3001,Rieder
 9724,9724,Anderson & Hoffman (WB),This stop (#9724) is westbound on the 3298 block of Anderson St farside Hoffman St,43.120357,-89.334334,MMT,CMAD,0,,1,270,1,Anderson,3298,Hoffman
 9725,9725,Kinsman & Wright (EB),This stop (#9725) is eastbound on the 3501 block of Kinsman Blvd farside Wright St,43.125574,-89.329781,MMT,CMAD,0,,1,90,1,Kinsman,3501,Wright
-9726,9726,Blue Aster & Legacy (WB),This stop (#9726) is westbound on the 2798 block of Blue Aster Blvd nearside Legacy Way,43.171828,-89.270465,MMT,CSUN,0,,3,270,0,Blue Aster,2798,Legacy
+9726,9726,Blue Aster & Legacy (WB),This stop (#9726) is westbound on the 2798 block of Blue Aster Blvd nearside Legacy Way,43.171828,-89.270465,MMT,CSUN,0,,3,270,1,Blue Aster,2798,Legacy
 9729,9729,International & Elder Care (NB),This stop (#9729) is northbound on the 2901 block of International Ln opposite Elder Care Driveway,43.127404,-89.348779,MMT,CMAD,0,,4,0,1,International,2901,Elder Care
 9733,9733,Walsh & Commercial (NB),This stop (#9733) is northbound on the 701 block of Walsh Rd farside Commercial Ave,43.106989,-89.309872,MMT,CMAD,0,,1,0,1,Walsh,701,Commercial
 9740,9740,Commercial N & N Fair Oaks (WB),This stop (#9740) is westbound on the 3398 block of Commercial Ave (N) farside Fair Oaks Ave (N),43.107077,-89.33114,MMT,CMAD,0,,1,270,1,Commercial N,3398,N Fair Oaks
@@ -2172,7 +2136,7 @@ stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,agency_id,jurisdiction_i
 9874,9874,E Washington & Macarthur (WB),This stop (#9874) is westbound on the 3700 block of E Washington Ave nearside Macarthur Rd,43.117655,-89.323788,MMT,CMAD,0,,3,270,1,E Washington,3700,Macarthur
 9880,9880,Swanton & Easley (SB),This stop (#9880) is southbound on the 116 block of Swanton Rd farside Easley Ln,43.101251,-89.301718,MMT,CMAD,0,,1,180,0,Swanton,116,Easley
 9892,9892,N Thompson & Mesta (SB),This stop (#9892) is southbound on the 828 block of Thompson Dr (N) nearside Mesta Ln,43.109788,-89.296713,MMT,CMAD,0,,3,180,1,N Thompson,828,Mesta
-9894,9894,Hoepker & Legacy (WB),This stop (#9894) is westbound on the 2800 block of Hoepker Rd farside Legacy Way,43.169115,-89.270681,MMT,CSUN,0,,1,270,0,Hoepker,2800,Legacy
+9894,9894,Hoepker & Legacy (WB),This stop (#9894) is westbound on the 2800 block of Hoepker Rd farside Legacy Way,43.169115,-89.270681,MMT,CSUN,0,,1,270,1,Hoepker,2800,Legacy
 9897,9897,E Washington & Wright (EB),This stop (#9897) is eastbound on the 3401 block of E Washington Ave farside Wright St,43.11312,-89.330094,MMT,CMAD,0,,1,90,1,E Washington,3401,Wright
 9900,9900,American Family & A F I Building (SB),This stop (#9900) is southbound on the 6000 block of American Family Driveway adjacent American Family Insurance,43.156741,-89.287653,MMT,PRIV,0,,2,180,1,American Family,6000,A F I Building
 9901,9901,E Terrace & U W Health (EB),This stop (#9901) is eastbound on the 5249 block of Terrace Dr (E) adjacent U W Health Clinic,43.145256,-89.290123,MMT,CMAD,0,,2,90,1,E Terrace,5249,U W Health
@@ -2182,7 +2146,7 @@ stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,agency_id,jurisdiction_i
 9932,9932,Eastpark & Broadview (SB),This stop (#9932) is southbound on the 4901 block of Eastpark Blvd adjacent Broadview University,43.146141,-89.297845,MMT,CMAD,0,,2,180,0,Eastpark,4901,Broadview
 9939,9939,Portage & Tomscot (NB),This stop (#9939) is northbound on the 3499 block of Portage Rd nearside Tomscot Trl,43.138392,-89.313094,MMT,CMAD,0,,3,0,1,Portage,3499,Tomscot
 9951,9951,N Thompson & Sycamore (NB),This stop (#9951) is northbound on the 1101 block of Thompson Dr (N) farside Sycamore Ave,43.114166,-89.295951,MMT,CMAD,0,,1,0,1,N Thompson,1101,Sycamore
-9953,9953,Blue Aster & Legacy (EB),This stop (#9953) is eastbound on the 2799 block of Blue Aster Blvd farside Legacy Way,43.171613,-89.270094,MMT,CSUN,0,,1,90,0,Blue Aster,2799,Legacy
+9953,9953,Blue Aster & Legacy (EB),This stop (#9953) is eastbound on the 2799 block of Blue Aster Blvd farside Legacy Way,43.171613,-89.270094,MMT,CSUN,0,,1,90,1,Blue Aster,2799,Legacy
 9955,9955,O'Keeffe & Prairie (EB),This stop (#9955) is eastbound on the 851 block of O'Keeffe Ave nearside Prairie Run,43.171146,-89.248202,MMT,CSUN,0,,3,90,0,O'Keeffe,851,Prairie
 9957,9957,City View & Wall (NB),This stop (#9957) is northbound on the 2501 block of City View Dr farside Wall St,43.132915,-89.287676,MMT,CMAD,0,,1,0,1,City View,2501,Wall
 9967,9967,Walsh & Nakoosa (NB),This stop (#9967) is northbound on the 899 block of Walsh Rd nearside Nakoosa Trl,43.110051,-89.309817,MMT,CMAD,0,,3,0,1,Walsh,899,Nakoosa
