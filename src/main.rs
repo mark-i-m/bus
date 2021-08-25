@@ -1,6 +1,8 @@
 //! Reads bus info and answers questions about routes.
 
 use std::collections::HashMap;
+use std::fs;
+use std::path;
 
 use bitflags::bitflags;
 
@@ -17,6 +19,9 @@ use serde::Deserialize;
 /// The address of the trip update.
 pub const TRIP_UPDATE_URL: &str =
     "http://transitdata.cityofmadison.com/TripUpdate/TripUpdates.json";
+
+/// The address of the schedule data.
+pub const GTFS_DATA_URL: &str = "http://transitdata.cityofmadison.com/GTFS/mmt_gtfs.zip";
 
 /// The default number of busses to show for a stop.
 pub const DEFAULT_N: usize = 10;
@@ -537,6 +542,38 @@ fn print_delay(delay: chrono::Duration) -> String {
     }
 }
 
+fn do_update(data_dir: &str) {
+    // remove old.
+    if path::PathBuf::from(data_dir).is_dir() {
+        fs::remove_dir_all(data_dir).expect("Unable to remove old data.");
+    }
+
+    // create empty new.
+    fs::create_dir_all(data_dir).expect("Unable to create new data directory.");
+
+    // download data.
+    const DATA_ZIP: &str = "data.zip";
+    let mut zipped = fs::OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(path::PathBuf::from(data_dir).join(DATA_ZIP))
+        .expect("Unable to open data zip file for writing.");
+    reqwest::blocking::get(GTFS_DATA_URL)
+        .expect("Unable to download schedule data.")
+        .copy_to(&mut zipped)
+        .expect("Unable to write received data to file.");
+
+    // unzip the file.
+    let status = std::process::Command::new("unzip")
+        .current_dir(data_dir)
+        .arg(DATA_ZIP)
+        .status()
+        .expect("Unable to unzip downloaded schedule data.");
+    if !status.success() {
+        panic!("Unzip failed with status: {}", status);
+    }
+}
+
 fn main() -> Result<(), failure::Error> {
     let matches = clap_app! { bus =>
         (about: "Info about scheduled buses.")
@@ -555,12 +592,20 @@ fn main() -> Result<(), failure::Error> {
             (about: "Searches for all bus stops that contain the given string")
             (@arg STR: +required ... "The string(s) to search for")
         )
+        (@subcommand update =>
+            (about: "Attempts to update GTFS schedule data.")
+        )
+
     }
     .setting(clap::AppSettings::SubcommandRequiredElseHelp)
     .get_matches();
 
     // Read the static bus schedule data.
-    let data_dir = std::env::var("BUS_DATA").unwrap_or("data".into());
+    let data_dir = std::env::var("BUS_DATA").expect(
+        "BUS_DATA environment variable needs to be set to the \
+         directory containing GTFS data. Optionally, set BUS_DATA \
+         and run the `update` command.",
+    );
     let data = Data::read(&data_dir)?;
 
     // Do computations and print stuff.
@@ -593,7 +638,7 @@ fn main() -> Result<(), failure::Error> {
             }
 
             // Read the real time trip update.
-            let real_time_json_raw = reqwest::get(TRIP_UPDATE_URL)?.text();
+            let real_time_json_raw = reqwest::blocking::get(TRIP_UPDATE_URL)?.text();
             let real_time_info = if let Ok(real_time_json_raw) = real_time_json_raw {
                 if let Ok(real_time_json) = json::parse(&real_time_json_raw) {
                     if let Ok(real_time_json) = parse_real_time_data(real_time_json) {
@@ -642,6 +687,10 @@ fn main() -> Result<(), failure::Error> {
             for (id, stop) in stops {
                 println!("{} {}", id, stop);
             }
+        }
+
+        ("update", Some(_)) => {
+            do_update(&data_dir);
         }
 
         _ => unreachable!(),
