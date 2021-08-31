@@ -90,7 +90,7 @@ checksum = "9c59e7af012c713f529e7a3ee57ce9b31ddd858d4b512923602f74608b009631"
 
 [[package]]
 name = "bus"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "bitflags",
  "chrono",

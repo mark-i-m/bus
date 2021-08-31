@@ -391,7 +391,11 @@ impl Data {
 
                     // Filter routes.
                     if let Some(route) = conf.route {
-                        if trip.route_short_name != route.to_string() {
+                        // If the short name is a number, then we don't want to mismatch because of
+                        // a leading 0... e.g. route 08 and route 8 should match.
+                        if trip.route_short_name.trim_start_matches("0")
+                            != route.trim_start_matches("0")
+                        {
                             return None;
                         }
                     }
