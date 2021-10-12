@@ -610,7 +610,6 @@ fn main() -> Result<(), failure::Error> {
          directory containing GTFS data. Optionally, set BUS_DATA \
          and run the `update` command.",
     );
-    let data = Data::read(&data_dir)?;
 
     // Do computations and print stuff.
     match matches.subcommand() {
@@ -660,6 +659,7 @@ fn main() -> Result<(), failure::Error> {
                 Default::default()
             };
 
+            let data = Data::read(&data_dir)?;
             let bus_info = data.stop_sched(filter, real_time_info)?;
 
             println!("{}", bus_info.stop_name);
@@ -686,6 +686,7 @@ fn main() -> Result<(), failure::Error> {
 
         ("search", Some(sub_m)) => {
             let strings = sub_m.values_of("STR").unwrap().collect();
+            let data = Data::read(&data_dir)?;
             let stops = data.search(strings);
 
             for (id, stop) in stops {
