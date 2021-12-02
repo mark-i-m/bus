@@ -17,6 +17,8 @@ jobs:
           profile: minimal
           override: true
           target: x86_64-unknown-linux-musl
+      - name: install musl tools
+        run: apt-get install -y musl-tools
       - name: checkout
         uses: actions/checkout@v2
         with:
