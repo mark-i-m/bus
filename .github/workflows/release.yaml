@@ -33,7 +33,7 @@ jobs:
             ~/.cargo/git/db/
             target/
           key: ${{ runner.os }}-cargo-v3-${{ hashFiles('**/Cargo.lock', '.github/workflows/releases.yaml') }}
-            # restore-keys: ${{ runner.os }}-cargo-v3-
+          restore-keys: ${{ runner.os }}-cargo-v3-
       - name: build
         run: cargo build --release --target=x86_64-unknown-linux-musl
       - name: debug
