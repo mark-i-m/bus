@@ -30,10 +30,12 @@ jobs:
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
             target/
-          key: ${{ runner.os }}-cargo-v3-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: ${{ runner.os }}-cargo-v3-
+          key: ${{ runner.os }}-cargo-v3-${{ hashFiles('**/Cargo.lock', '.github/workflows/releases.yaml') }}
+            # restore-keys: ${{ runner.os }}-cargo-v3-
       - name: build
-        run: cargo build --release
+        run: cargo build --release --target=x86_64-unknown-linux-musl
+      - name: debug
+        run: ls -R
       - name: version
         run: echo "::set-output name=version::$(git rev-parse --short HEAD)"
         id: version
