@@ -26,6 +26,7 @@ pub const GTFS_DATA_URL: &str = "http://transitdata.cityofmadison.com/GTFS/mmt_g
 /// The default number of busses to show for a stop.
 pub const DEFAULT_N: usize = 10;
 
+#[allow(dead_code)]
 #[derive(Debug, Clone, Deserialize)]
 struct Trip {
     route_id: String,
@@ -44,6 +45,7 @@ struct Trip {
     bikes_allowed: String,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Clone, Deserialize)]
 struct Stop {
     stop_id: String,
@@ -78,6 +80,7 @@ struct StopTimeRaw {
     shape_dist_traveled: String,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 struct StopTime {
     trip_id: String,
@@ -153,6 +156,7 @@ impl Days {
     }
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 struct Calendar {
     service_id: String,
