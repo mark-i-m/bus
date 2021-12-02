@@ -3,7 +3,8 @@ name: release
 on:
   push:
     branches:
-      - '*'
+      - master
+      - ci
 
 jobs:
   build_release:
@@ -47,8 +48,8 @@ jobs:
         with:
           draft: false
           prerelease: false
-          release_name: ${{ steps.version.outputs.version }}
-          tag_name: tag-${{ steps.version.outputs.version }}
+          release_name: r${{ github.run_id }}-${{ steps.version.outputs.version }}
+          tag_name: r${{ github.run_id }}-${{ steps.version.outputs.version }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - name: checksum
