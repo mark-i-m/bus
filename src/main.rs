@@ -12,7 +12,7 @@ use clap::clap_app;
 
 use csv::ReaderBuilder;
 
-use failure::bail;
+use anyhow::bail;
 
 use serde::Deserialize;
 
@@ -66,6 +66,7 @@ struct Stop {
     cross_location: String,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Clone, Deserialize)]
 struct StopTimeRaw {
     trip_id: String,
@@ -296,7 +297,7 @@ struct Data {
 }
 
 impl Data {
-    pub fn read(data_dir: &str) -> Result<Self, failure::Error> {
+    pub fn read(data_dir: &str) -> Result<Self, anyhow::Error> {
         let mut calendar: HashMap<String, Calendar> = ReaderBuilder::new()
             .has_headers(true)
             .from_path(format!("{}/calendar.txt", data_dir))?
@@ -360,7 +361,7 @@ impl Data {
         &self,
         conf: FilterConfig,
         real_time: HashMap<String, HashMap<String, f64>>,
-    ) -> Result<StopBusInfo, failure::Error> {
+    ) -> Result<StopBusInfo, anyhow::Error> {
         fn to_local(naive: NaiveDate) -> Date<Local> {
             Local::today()
                 .timezone()
@@ -497,7 +498,7 @@ macro_rules! warn_and_skip {
 // {stop_id: {trip_id: delay}}
 fn parse_real_time_data(
     mut real_time_json: json::JsonValue,
-) -> Result<HashMap<String, HashMap<String, f64>>, failure::Error> {
+) -> Result<HashMap<String, HashMap<String, f64>>, anyhow::Error> {
     assert!(real_time_json.has_key("entity"));
 
     let mut by_stop_id_by_trip_id: HashMap<String, HashMap<String, f64>> = HashMap::new();
@@ -582,7 +583,7 @@ fn do_update(data_dir: &str) {
     }
 }
 
-fn main() -> Result<(), failure::Error> {
+fn main() -> Result<(), anyhow::Error> {
     let matches = clap_app! { bus =>
         (about: "Info about scheduled buses.")
         (@subcommand stop =>
