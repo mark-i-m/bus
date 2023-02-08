@@ -87,9 +87,9 @@ checksum = "b700ce4376041dcd0a327fd0097c41095743c4c8af8887265942faf1100bd040"
 
 [[package]]
 name = "cc"
-version = "1.0.69"
+version = "1.0.79"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e70cc2f62c6ce1868963827bd677764c62d07c3d9a3e1fb1177ee1a9ab199eb2"
+checksum = "50d30906286121d95be3d479533b458f87493b30a4b5f79a607db8f5d11aa91f"
 
 [[package]]
 name = "cfg-if"
@@ -562,9 +562,9 @@ checksum = "28988d872ab76095a6e6ac88d99b54fd267702734fd7ffe610ca27f533ddb95a"
 
 [[package]]
 name = "openssl-src"
-version = "300.0.11+3.0.7"
+version = "300.0.12+3.0.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "181e2429088818099075f6ccf30e6d096a513c46e7e0b946a4dde055c35cb17a"
+checksum = "4d974055736373bab35bdb25e578fd477e1e195611744c42373294ac8897068d"
 dependencies = [
  "cc",
 ]
