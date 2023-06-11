@@ -35,7 +35,7 @@ struct Trip {
     trip_id: String,
     trip_headsign: String,
     direction_id: String,
-    direction_name: String,
+    trip_direction_name: String,
     block_id: String,
     shape_id: String,
     shape_code: String,
