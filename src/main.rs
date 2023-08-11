@@ -6,7 +6,7 @@ use std::path;
 
 use bitflags::bitflags;
 
-use chrono::{offset::Local, Date, DateTime, Datelike, NaiveDate, NaiveTime, TimeZone, Weekday};
+use chrono::{offset::Local, Datelike, NaiveDate, NaiveDateTime, NaiveTime, Weekday};
 
 use clap::clap_app;
 
@@ -105,9 +105,9 @@ impl StopTime {
             pickup_type: raw.pickup_type,
             drop_off_type: raw.drop_off_type,
             arrival_time: NaiveTime::parse_from_str(&raw.arrival_time, "%k:%M:%S")
-                .unwrap_or_else(|_| NaiveTime::from_hms(0, 0, 0)),
+                .unwrap_or_else(|_| NaiveTime::from_hms_opt(0, 0, 0).unwrap()),
             departure_time: NaiveTime::parse_from_str(&raw.departure_time, "%k:%M:%S")
-                .unwrap_or_else(|_| NaiveTime::from_hms(0, 0, 0)),
+                .unwrap_or_else(|_| NaiveTime::from_hms_opt(0, 0, 0).unwrap()),
             timepoint: raw.timepoint,
             stop_headsign: raw.stop_headsign,
             shape_dist_traveled: raw.shape_dist_traveled,
@@ -251,7 +251,7 @@ struct FilterConfig<'s> {
     stop_id: &'s str,
 
     /// List buses at or after `after`
-    after: DateTime<Local>,
+    after: NaiveDateTime,
 
     /// How many buses to list?
     how_many: Option<usize>,
@@ -264,13 +264,13 @@ impl<'s> FilterConfig<'s> {
     pub fn new(stop_id: &'s str) -> FilterConfig<'s> {
         Self {
             stop_id,
-            after: Local::now(),
+            after: Local::now().naive_local(),
             how_many: None,
             route: None,
         }
     }
 
-    pub fn after(self, after: DateTime<Local>) -> Self {
+    pub fn after(self, after: NaiveDateTime) -> Self {
         Self { after, ..self }
     }
 
@@ -362,18 +362,6 @@ impl Data {
         conf: FilterConfig,
         real_time: HashMap<String, HashMap<String, f64>>,
     ) -> Result<StopBusInfo, anyhow::Error> {
-        fn to_local(naive: NaiveDate) -> Date<Local> {
-            Local::today()
-                .timezone()
-                .from_local_date(&naive)
-                .single()
-                .expect("ambiguous date")
-        }
-
-        fn to_local_time(naive: NaiveTime) -> DateTime<Local> {
-            Local::today().and_time(naive).expect("invalid date/time")
-        }
-
         if let Some(stop) = self.stops.get(conf.stop_id) {
             let buses = self
                 .stop_times
@@ -382,7 +370,7 @@ impl Data {
                 .unwrap_or_else(|| vec![]);
 
             // Filter buses that don't come today.
-            let now = conf.after;
+            let now = conf.after.time();
             let today = conf.after.date();
             let day = today.weekday();
             let mut buses: Vec<_> = buses
@@ -409,19 +397,19 @@ impl Data {
                     // during an exception.
                     //
                     // Moreover, filter out buses that already came.
-                    if to_local(service.start_date) > today {
+                    if service.start_date > today {
                         None
-                    } else if to_local(service.end_date) < today {
+                    } else if service.end_date < today {
                         None
                     } else if !service.days.contains(Days::from_weekday(day)) {
                         None
                     } else if service.exceptions.iter().any(|ex| {
-                        to_local(ex.date) == today
+                        ex.date == today
                             && service.service_id == ex.service_id
                             && ex.exception_type == ExceptionType::Removed
                     }) {
                         None
-                    } else if to_local_time(bus.departure_time) < now {
+                    } else if bus.departure_time < now {
                         None
                     } else {
                         // Check for real-time delays.
@@ -625,12 +613,10 @@ fn main() -> Result<(), anyhow::Error> {
 
             if let Some(after) = sub_m.value_of("WHEN") {
                 filter = filter.after(
-                    Local::today()
-                        .and_time(
-                            NaiveTime::parse_from_str(after, "%H:%M")
-                                .unwrap_or_else(|_| NaiveTime::from_hms(0, 0, 0)),
-                        )
-                        .expect("invalid date/time"),
+                    Local::now().date_naive().and_time(
+                        NaiveTime::parse_from_str(after, "%H:%M")
+                            .unwrap_or_else(|_| NaiveTime::from_hms_opt(0, 0, 0).unwrap()),
+                    ),
                 );
             }
 
@@ -717,12 +703,6 @@ fn is_usize(s: String) -> Result<(), String> {
 }
 
 fn is_time(s: String) -> Result<(), String> {
-    let naive = NaiveTime::parse_from_str(&s, "%H:%M")
-        .map_err(|e| format!("Could not parse time: {}", e))?;
-
-    if Local::today().and_time(naive).is_none() {
-        Err("Ambiguous time".into())
-    } else {
-        Ok(())
-    }
+    NaiveTime::parse_from_str(&s, "%H:%M").map_err(|e| format!("Could not parse time: {}", e))?;
+    Ok(())
 }
