@@ -594,7 +594,7 @@ fn main() -> Result<(), anyhow::Error> {
              (HH:MM, 24-hour clock).")
             (@arg N: +takes_value --next -n {is_usize}
              "List the next N buses.")
-            (@arg ROUTE: +takes_value --route -r {is_usize}
+            (@arg ROUTE: +takes_value --route -r
              "List only busses taking route ROUTE.")
         )
         (@subcommand search =>
